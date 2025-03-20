@@ -1,0 +1,76 @@
+{
+    "TC01": {
+        "currentAge": "30",
+        "retirementAge": "65",
+        "currentIncome": "$100000",
+        "spouseIncome": "$50000",
+        "currentSavings": "$100000",
+        "annualSavings": "$10000",
+        "savingsIncrease": "2",
+        "socialSecuritybenefit" : "Yes",
+        "socialSecurityAmount": "$4000"
+        
+    },
+    "TC02": {
+        "currentAge": "40",
+        "retirementAge": "67",
+        "currentIncome": "$120000",
+        "spouseIncome": "$60000",
+        "currentSavings": "$200000",
+        "annualSavings": "$15000",
+        "savingsIncrease": "3",
+        "socialSecuritybenefit" : "Yes",
+        "socialSecurityAmount": "$5000",
+        "additionalIncome": "$1000",
+        "retirementDuration": "25",
+        "postRetirementIncomeIncreasewithInflation": "No",
+        "inflationRate": "80",  
+        "retirementIncome" : "30",
+        "preRetirementRoi": "7",    
+        "postRetirementRoi": "5"
+
+    },
+    "TC03": {
+        "currentAge": "40",
+        "retirementAge": "67",
+        "currentIncome": "$120000",
+        "spouseIncome": "$60000",
+        "currentSavings": "$200000",
+        "annualSavings": "$15000",
+        "savingsIncrease": "3",
+        "socialSecuritybenefit" : "No",
+        "socialSecurityAmount": "$5000",
+        "additionalIncome": "$1000",
+        "retirementDuration": "25",
+        "postRetirementIncomeIncreasewithInflation": "Yes",
+        "inflationRate": "80",  
+        "retirementIncome" : "30",
+        "preRetirementRoi": "7",    
+        "postRetirementRoi": "5"
+
+    },
+    "TC04": {
+        "currentAge": "123",
+        "retirementAge": "67",
+        "currentIncome": "$120000",
+        "spouseIncome": "$60000",
+        "currentSavings": "$200000",
+        "annualSavings": "$15000",
+        "savingsIncrease": "3",
+        "socialSecuritybenefit" : "Yes",
+        "socialSecurityAmount": "$5000"
+
+    },
+    "TC05": {
+        "currentAge": "40",
+        "retirementAge": "135",
+        "currentIncome": "$120000",
+        "spouseIncome": "$60000",
+        "currentSavings": "$200000",
+        "annualSavings": "$15000",
+        "savingsIncrease": "3",
+        "socialSecuritybenefit" : "Yes",
+        "socialSecurityAmount": "$5000"
+
+    }
+}
