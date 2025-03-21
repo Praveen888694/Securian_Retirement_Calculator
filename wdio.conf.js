@@ -8,7 +8,8 @@ export const config = {
     ],
     maxInstances: 10,
     capabilities: [{
-        browserName: 'chrome'
+        browserName: 'chrome',
+       'wdio:enforceWebDriverClassic': true
     }],
     logLevel: 'error',
     outputDir: './logs',
