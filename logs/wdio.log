@@ -1,9 +1,5 @@
-2025-03-19T19:16:15.327Z ERROR @wdio/runner: Error: No "browserName" defined in capabilities nor hostname or port found!
-If you like to run a local browser session make sure to pick from one of the following browser names: chrome,googlechrome,chromium,chromium-browser,firefox,ff,mozilla,mozilla firefox,edge,microsoftedge,msedge,safari,safari technology preview
-    at startWebDriver (file:///C:/WebAutomation/Securian_Automation/node_modules/@wdio/utils/build/node.js:301:11)
-    at startWebDriver (C:\WebAutomation\Securian_Automation\node_modules\@wdio\utils\build\index.js:504:12)
-    at async _WebDriver.newSession (file:///C:/WebAutomation/Securian_Automation/node_modules/webdriver/build/node.js:1327:27)
-    at async remote (C:\WebAutomation\Securian_Automation\node_modules\webdriverio\build\node.js:8722:20)
-    at async Runner._startSession (file:///C:/WebAutomation/Securian_Automation/node_modules/@wdio/runner/build/index.js:815:23)
-    at async Runner._initSession (file:///C:/WebAutomation/Securian_Automation/node_modules/@wdio/runner/build/index.js:789:22)
-    at async Runner.run (file:///C:/WebAutomation/Securian_Automation/node_modules/@wdio/runner/build/index.js:696:16)
+2025-03-28T20:27:07.920Z ERROR webdriver: WebDriverError: invalid selector: Unable to locate an element with the xpath expression //*[@id="post-retirement-roi" because of the following error:
+SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//*[@id="post-retirement-roi"' is not a valid XPath expression.
+  (Session info: chrome=134.0.6998.178) when running "element" with method "POST" and args "{"using":"xpath","value":"//*[@id=\"post-retirement-roi\""}"
+2025-03-28T20:27:17.148Z ERROR webdriver: WebDriverError: element not interactable
+  (Session info: chrome=134.0.6998.178) when running "element/f.55464E2058B777E07CF4EF5EE54BDE8B.d.F9DA148DD29E8E20CEF2A44EFFA65098.e.257/click" with method "POST"

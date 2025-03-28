@@ -1,64 +1,103 @@
 import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import path from 'path';
+import { getFormattedTimestamp } from './dateUtils.js';
 
 class PdfReportGenerator {
-    constructor(testCase) {
+    constructor(testCase = 'default') {
         this.testCase = testCase;
-        this.timestamp = new Date().toISOString().replace(/[^0-9]/g, '');
-        this.pdfPath = `./test-reports/retirement_calculator_${testCase}_${this.timestamp}.pdf`;
-        this.screenshotCount = 0;
-        this.initializePdf();
-    }
-
-    initializePdf() {
-        if (!fs.existsSync('./test-reports')) {
-            fs.mkdirSync('./test-reports', { recursive: true });
+        const timestamp = getFormattedTimestamp();
+        const sanitizedTestCase = testCase.replace(/[^a-zA-Z0-9]/g, '_');
+        const fileName = `retirement_calculator_${sanitizedTestCase}_${timestamp}.pdf`;
+        
+        const reportsDir = path.resolve('./test-reports');
+        if (!fs.existsSync(reportsDir)) {
+            fs.mkdirSync(reportsDir, { recursive: true });
         }
+        
+        this.filePath = path.join(reportsDir, fileName);
+        this.screenshotCount = 0;
 
-        this.pdfDoc = new PDFDocument({
+        this.doc = new PDFDocument({
             size: 'A4',
             margin: 50,
             info: {
-                Title: `Test Report - ${this.testCase}`,
-                Author: 'Automation Test'
+                Title: `Retirement Calculator Test Report - ${testCase}`,
+                Author: 'Automation Test',
+                CreationDate: new Date()
             }
         });
 
-        this.pdfDoc.pipe(fs.createWriteStream(this.pdfPath));
-        
-        
-        this.pdfDoc.fontSize(24).text('Retirement Calculator Test Report', { align: 'center' });
-        this.pdfDoc.moveDown();
-        this.pdfDoc.fontSize(16).text(`Test Case: ${this.testCase}`, { align: 'center' });
-        this.pdfDoc.fontSize(12).text(`Execution Date: ${new Date().toLocaleString()}`, { align: 'center' });
+        this.writeStream = fs.createWriteStream(this.filePath);
+        this.doc.pipe(this.writeStream);
+        this.addHeader();
+    }
+
+    addHeader() {
+        this.doc
+            .font('Helvetica-Bold')
+            .fontSize(24)
+            .text('Retirement Calculator Test Report', {
+                align: 'center'
+            })
+            .moveDown()
+            .fontSize(16)
+            .text(`Test Case: ${this.testCase}`, {
+                align: 'center'
+            })
+            .fontSize(12)
+            .text(`Execution Date: ${new Date().toLocaleString()}`, {
+                align: 'center'
+            })
+            .moveDown(2);
     }
 
     async addScreenshot(name, imagePath) {
-        try {
-            this.pdfDoc.addPage();
-            this.screenshotCount++;
-            
-            
-            this.pdfDoc.fontSize(16).text(`Step ${this.screenshotCount}: ${name}`, { align: 'center' });
-            this.pdfDoc.moveDown();
+        if (!this.doc) return;
 
-           
-            this.pdfDoc.image(imagePath, {
+        try {
+            if (!fs.existsSync(imagePath)) {
+                console.error(`Screenshot not found: ${imagePath}`);
+                return;
+            }
+
+            this.screenshotCount++;
+            this.doc.addPage();
+
+            this.doc
+                .fontSize(16)
+                .text(`Step ${this.screenshotCount}: ${name}`, {
+                    align: 'center'
+                })
+                .moveDown();
+
+            this.doc.image(imagePath, {
                 fit: [500, 700],
                 align: 'center'
             });
 
-       
-            this.pdfDoc.fontSize(10).text(new Date().toLocaleString(), { align: 'right' });
         } catch (error) {
-            console.error(`Error adding screenshot to PDF: ${error.message}`);
+            console.error(`Screenshot error: ${error.message}`);
         }
     }
 
-    finalize() {
-        this.pdfDoc.end();
-        console.log(`PDF report generated: ${this.pdfPath}`);
+    async finalize() {
+        try {
+            this.doc.addPage();
+            this.doc
+                .fontSize(16)
+                .text('Test Summary', {
+                    align: 'center'
+                })
+                .moveDown()
+                .text(`Total Screenshots: ${this.screenshotCount}`);
+
+            this.doc.end();
+            return this.filePath;
+        } catch (error) {
+            console.error('Error finalizing PDF:', error);
+            throw error;
+        }
     }
 }
 

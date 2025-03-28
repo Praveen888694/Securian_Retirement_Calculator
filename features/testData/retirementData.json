@@ -1,5 +1,5 @@
 {
-    "TC01": {
+    "ReqAllFieldsWithoutAdjDefVals": {
         "currentAge": "30",
         "retirementAge": "65",
         "currentIncome": "$100000",
@@ -11,7 +11,7 @@
         "socialSecurityAmount": "$4000"
         
     },
-    "TC02": {
+    "ReqAllFieldsWithAdjstedDefVals_TestData1": {
         "currentAge": "40",
         "retirementAge": "67",
         "currentIncome": "$120000",
@@ -30,7 +30,7 @@
         "postRetirementRoi": "5"
 
     },
-    "TC03": {
+    "ReqAllFieldsWithAdjstedDefVals_TestData2": {
         "currentAge": "40",
         "retirementAge": "67",
         "currentIncome": "$120000",
@@ -49,7 +49,7 @@
         "postRetirementRoi": "5"
 
     },
-    "TC04": {
+    "currentAgeGreaterThan120": {
         "currentAge": "123",
         "retirementAge": "67",
         "currentIncome": "$120000",
@@ -61,7 +61,7 @@
         "socialSecurityAmount": "$5000"
 
     },
-    "TC05": {
+    "retirementAgeGreaterThan120": {
         "currentAge": "40",
         "retirementAge": "135",
         "currentIncome": "$120000",
